@@ -1,6 +1,4 @@
-<div *ngIf="loading" class="loading" style="z-index: 999999">
-        <div class="loader"></div>
-    </div>
+
 
 
 .loading {
@@ -40,3 +38,8 @@
         transform: rotate(0deg);
     }
 }
+
+
+-----------------------------<div *ngIf="loading" class="loading" style="z-index: 999999">
+        <div class="loader"></div>
+    </div>
