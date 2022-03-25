@@ -1,59 +1,42 @@
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  cursor: pointer;
+<div *ngIf="loading" class="loading" style="z-index: 999999">
+        <div class="loader"></div>
+    </div>
+
+
+.loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+}
+.loader {
+    left: 50%;
+    margin-left: -4em;
+    font-size: 10px;
+    border: 0.8em solid rgba(218, 219, 223, 1);
+    border-left: 0.8em solid #ee7f00;
+    animation: spin 1.2s infinite linear;
+    z-index: 5;
+}
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 8em;
+    height: 8em;
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -4.05em;
+    z-index: 5;
 }
 
-.notArrow{
-    padding: 4px;
-}
-
-.right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-
-
----------------------------------------------------------------------------------------------------------------
-
-<div>
-  <ng-container *ngFor="let item of items;let i=index"> 
-      <p>
-        <i [class]="item.isExpand ? item.class : 'notArrow'" (click)="openlevel(i,1)"></i>&nbsp; {{item.text}}
-        <ng-container *ngFor="let level1 of item.children;let j=index"> 
-          <p style="margin:10px">
-            <i [class]="level1.isExpand ? level1.class : 'notArrow'" (click)="openlevel(j,2)"></i>&nbsp; {{level1.text}}   
-          </p>
-      </ng-container>
-      </p>
-  </ng-container>
-</div>
-
-
-------------------------------------------------------
-
-openlevel(i,level){
-  if(level === 1){
-    if(this.items[i]['class'] === "arrow down"){
-      this.items[i]['class'] = "arrow right"
-      this.items[i]['children'] = []
-      return
+@keyframes spin {
+    0% {
+        transform: rotate(360deg);
     }
-    this.items[i]['children'] = [
-      {
-        text:"level1",
-        value:"level1",
-        isExpand:true,
-        class:"arrow right"
-      }
-    ]
-    this.items[i]['class'] = "arrow down"
-  }
+    100% {
+        transform: rotate(0deg);
+    }
 }
